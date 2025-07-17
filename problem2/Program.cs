@@ -5,19 +5,16 @@
     /// </summary>
     /// <param name="args">引数</param>
     static void Main(string[] args)
-    {//Validation
+    {
         if (!ValidateArgs(args, out int year))
         {
             Console.WriteLine("整数の年を入力してください");
             return;
         }
-        if (year < 0)
-        {
-            Console.WriteLine("正数を入力してください");
-            return;
-        }
+       
         ShowYear(year);
     }
+    
     /// <summary>
     /// エラーチェック
     /// </summary>
@@ -26,7 +23,7 @@
     /// <returns>整数かつ整数</returns>
     static bool ValidateArgs(string[] args, out int year)
     {
-        year = 0;
+        year = default;
         if (args.Length == 0)
         {
 
