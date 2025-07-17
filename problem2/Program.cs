@@ -6,9 +6,9 @@
     /// <param name="args">引数</param>
     static void Main(string[] args)
     {
-        if (!ValidateArgs(args, out int year))
+        if (!ValidateArgs(args, out int year,out string error))
         {
-            Console.WriteLine("整数の年を入力してください");
+            Console.WriteLine(error);
             return;
         }
        
@@ -21,20 +21,23 @@
     /// <param name="args">コマンドライン引数</param>
     /// <param name="year">引数</param>
     /// <returns>整数かつ整数</returns>
-    static bool ValidateArgs(string[] args, out int year)
+    static bool ValidateArgs(string[] args, out int year,out string error)
     {
         year = default;
+        error = string.Empty;
         if (args.Length == 0)
         {
-
+            error = "引数が設定されていません";
             return false;
         }
         if (!int.TryParse(args[0], out year))
         {
+            error = "整数を入力してください";
             return false;
         }
         if (year < 0)
         {
+            error = "正数を入力してください";
             return false;
         }
         return true;
