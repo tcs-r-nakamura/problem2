@@ -1,9 +1,12 @@
-﻿using System;
-class Program2
+﻿class Program2
 {
+    /// <summary>
+    /// 引数が整数かつ正数か判定
+    /// </summary>
+    /// <param name="args">引数</param>
     static void Main(string[] args)
-    {
-        if (!int.TryParse(args[0], out var year))
+    {//Validation
+        if (!ValidateArgs(args, out int year))
         {
             Console.WriteLine("整数の年を入力してください");
             return;
@@ -14,9 +17,36 @@ class Program2
             return;
         }
         ShowYear(year);
-
     }
-    //うるう年表示メソッド
+    /// <summary>
+    /// エラーチェック
+    /// </summary>
+    /// <param name="args">コマンドライン引数</param>
+    /// <param name="year">引数</param>
+    /// <returns>整数かつ整数</returns>
+    static bool ValidateArgs(string[] args, out int year)
+    {
+        year = 0;
+        if (args.Length == 0)
+        {
+
+            return false;
+        }
+        if (!int.TryParse(args[0], out year))
+        {
+            return false;
+        }
+        if (year < 0)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    /// <summary>
+    ///  うるう年表示メソッド
+    /// </summary>
+    /// <param name="year">引数</param>
     static void ShowYear(int year)
     {
         if (IsLeapYear(year))
@@ -28,18 +58,17 @@ class Program2
             Console.WriteLine("うるう年ではありません");
         }
     }
-    //うるう年判定メソッド
+
+    /// <summary>
+    /// うるう年判定メソッド
+    /// </summary>
+    /// <param name="year">引数</param>
+    /// <returns>うるう年</returns>
     static bool IsLeapYear(int year)
     {
         //もし4で割り切れかつ、100で割り切れない、または400で割り切れる
-        if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0)
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+        return ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0);
 
+    }
 }
+
